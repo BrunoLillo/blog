@@ -1,10 +1,10 @@
 FROM python:3.11.3-alpine3.18
-LABEL mantainer='bruno_lillo@hotmail.com'
+LABEL mantainer="bruno_lillo@hotmail.com"
 
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-COPY django /djangoapp
+COPY djangoapp /djangoapp
 COPY scripts /scripts
 
 WORKDIR /djangoapp
