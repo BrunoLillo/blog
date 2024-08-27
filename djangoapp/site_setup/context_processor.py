@@ -4,7 +4,7 @@ def context(request):
         'example':'Veio do context'
 }
 def site_setup(request):
-    setup= SiteSetup.objects.order_by('-id')
+    setup= SiteSetup.objects.order_by('-id').first()
     
     return{
         'site_setup':{
