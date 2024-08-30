@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
 
-posts = list(range(1000))
+posts = list(range(100))
 
 def index(request):
     paginator = Paginator(posts,9)
