@@ -1,6 +1,6 @@
 from django.db import models
 from utils.rands import slugfy_new
-
+from django.contrib.auth.models import User
 
 class Tag(models.Model):
     class Meta:
@@ -21,7 +21,6 @@ class Tag(models.Model):
     def __str__(self) -> str:
         return self.name
 
-
 class Category(models.Model):
     class Meta:
         verbose_name = 'Category'
@@ -41,8 +40,6 @@ class Category(models.Model):
     def __str__(self) -> str:
         return self.name
 
-
-
 class Page(models.Model):
     title = models.CharField(max_length=65,)
     slug = models.SlugField(
@@ -60,6 +57,7 @@ class Page(models.Model):
     
     def __str__(self) -> str:
         return self.title
+
 class Post(models.Model):
     class Meta:
         verbose_name = 'Post'
@@ -78,7 +76,20 @@ class Post(models.Model):
         help_text = 'Se marcado exibira a capa dentro do post'
     )
     created_at = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+        related_name='post_created_by'
+    )
     update_at = models.DateTimeField(auto_now=True)
+    #user.post_updated_by.all
+    update_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+        related_name='post_updated_by'
+    )
     #Relação com tag/Category
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, 
